@@ -7,7 +7,7 @@ const port = 3000
 const icon = '<link rel="icon" href="data:,"></link>'
 
 // time 
-function timestamps(time) {
+function timestamps() {
   return moment().format('YYYY-MM-DD HH:mm:ss')
 }
 
@@ -18,12 +18,11 @@ app.use((req, res, next) => {
   const method = req.method
   // request url
   const url = req.originalUrl
-  // sever log 
-  console.log(timestamps(startTime), '|', method, 'from ', url,)
 
   res.on('finish', () => {
     const endTime = Date.now()
     const duration = endTime - startTime
+    // server log
     console.log(timestamps(endTime), '|', method, 'from ', url, '|', 'total time: ', duration, 'ms')
   })
   // call the next middleware
